@@ -1,6 +1,32 @@
 # Tutorial APAP
 ## Authors
 * **Muhammad Marsha Prawira** - *1906353864* - *C*
+---
+## Tutorial 2
+### What I have learned today
+Saya belajar mengenai pengaplikasian konsep MVC(Model View Controller) pada Springboot serta CRUD data tanpa database.
+### Pertanyaan
+1. Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut:
+http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx jumlahStudio=10 
+Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi
+= Saat menjalankan step ini, kita belum membuat komponen view yaitu file HTML padahal sudah kita panggil melalui controller. Hal tersebut menyebabkan error.
+
+2. Menurut kamu anotasi @Autowired pada class Controller tersebut merupakan implementasi dari konsep apa? Dan jelaskan secara singkat cara kerja @Autowired tersebut dalam konteks service dan controller yang telah kamu buat
+= Anotasi @Autowired membuat kita tidak perlu melakukan wiring sendiri pada file XML atau yang lainnya dan melakukan untuk kita apa yang perlu untuk di inject.
+referensi: https://stackoverflow.com/questions/19414734/understanding-spring-autowired-usage 
+
+3. Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut:
+http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi.
+= Saat mengakses link tersebut akan keluar pesan error karena kita belum mendefinisikan jumlah studio pada url. Sehingga saat object dibuat akan kekurangan 1 parameter sehingga menjadi error.
+
+4. Jika Papa APAP ingin melihat Bioskop dengan nama Bioskop Maung, link apa yang harus diakses?
+= http://localhost:8080/bioskop/view/id-bioskop/1
+
+5. Tambahkan 1 contoh Bioskop lainnya sesukamu. Lalu cobalah untuk mengakses http://localhost:8080/bioskop/viewall , apa yang akan ditampilkan? Sertakan juga bukti screenshotmu.
+= [berikut]https://ibb.co/wpDQ5gP
+
+### What I did not understand
+Konsep pada penggunaan autowiring pada controller.
 
 ---
 ## Tutorial 1
