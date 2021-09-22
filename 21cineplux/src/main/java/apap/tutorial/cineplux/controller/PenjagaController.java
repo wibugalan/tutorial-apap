@@ -56,7 +56,7 @@ public class PenjagaController {
     ) {
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
         if (bioskopService.cekBuka(bioskop)) {
-            return "Error";
+            return "error-penjaga-related";
         }
         for (PenjagaModel p: bioskop.getListPenjaga()) {
             if (p.getNoPenjaga() == noPenjaga) {
@@ -87,7 +87,7 @@ public class PenjagaController {
     ) {
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
         if (bioskopService.cekBuka(bioskop)) {
-            return "Error";
+            return "error-penjaga-related";
         }
         for (PenjagaModel p: bioskop.getListPenjaga()) {
             if (p.getNoPenjaga() == noPenjaga) {

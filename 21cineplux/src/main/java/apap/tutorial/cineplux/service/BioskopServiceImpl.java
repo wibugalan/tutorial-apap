@@ -52,4 +52,17 @@ public class BioskopServiceImpl implements BioskopService {
         }
         return false;
     }
+
+    @Override
+    public boolean cekPenjaga(BioskopModel bioskop) {
+        if(bioskop.getListPenjaga().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void deleteBioskop(BioskopModel bioskop) {
+        bioskopDB.delete(bioskop);
+    }
 }

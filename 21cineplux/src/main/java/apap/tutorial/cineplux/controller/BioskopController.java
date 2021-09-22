@@ -75,89 +75,36 @@ public class BioskopController {
         return "update-bioskop";
     }
 
-//    @RequestMapping("/bioskop/viewall")
-//    public String listBioskop(Model model) {
-//        List<BioskopModel> listBioskop = bioskopService.getBioskopList();
-//        model.addAttribute("listBioskop",listBioskop);
-//        return "viewall-bioskop";
-//    }
-//
-//    @RequestMapping("/bioskop/view")
-//    public String detailBioskop(
-//            @RequestParam(value = "idBioskop", required = true) String idBioskop,
-//            Model model
-//    ){
-//        BioskopModel bioskopModel = bioskopService.getBioskopByIdBioskop(idBioskop);
-//        model.addAttribute("bioskop", bioskopModel);
-//
-//        return "view-bioskop";
-//    }
-//    @RequestMapping("/bioskop/view/id-bioskop/{idBioskop}")
-//    public String viewDetailByID(
-//            @PathVariable(value = "idBioskop") String idBioskop, Model model
-//    ) {
-//        BioskopModel bioskop = bioskopService.getBioskopByIdBioskop(idBioskop);
-//        if (bioskop == null) {
-//            model.addAttribute("operasi", "View by Id");
-//            return "error-id";
-//        }
-//        return detailBioskop(idBioskop, model);
-//    }
-//
-//    @RequestMapping("/bioskop/update/id-bioskop/{idBioskop}/jumlah-studio/{jumlahStudio}")
-//    public String updateJumlahStudio (
-//            @PathVariable(value = "idBioskop", required = true) String idBioskop,
-//            @PathVariable(value = "jumlahStudio", required = true) int jumlahStudio,
-//            Model model
-//    ) {
-//        BioskopModel bioskop = bioskopService.getBioskopByIdBioskop(idBioskop);
-//        if (bioskop == null) {
-//            model.addAttribute("operasi", "Update");
-//            return "error-id";
-//        }
-//        bioskop.setJumlahStudio(jumlahStudio);
-//        model.addAttribute("idBioskop", idBioskop);
-//        return "update-bioskop";
-//    }
-//
-//    @RequestMapping("/bioskop/update/id-bioskop/{idBioskop}/nama-bioskop/{namaBioskop}")
-//    public String updateNamaBioskop (
-//            @PathVariable(value = "idBioskop", required = true) String idBioskop,
-//            @PathVariable(value = "namaBioskop", required = true) String namaBioskop,
-//            Model model
-//    ) {
-//        BioskopModel bioskop = bioskopService.getBioskopByIdBioskop(idBioskop);
-//        if (bioskop == null) {
-//            model.addAttribute("operasi", "Update");
-//            return "error-id";
-//        }
-//        if (bioskopService.cekNama(namaBioskop).equals("false")) {
-//            model.addAttribute("operasi", "Update");
-//            return "error-id";
-//        }
-//        bioskop.setNamaBioskop(namaBioskop);
-//        model.addAttribute("idBioskop", idBioskop);
-//        return "update-bioskop";
-//    }
-//
-//    @RequestMapping("/bioskop/delete/id-bioskop/{idBioskop}")
-//    public String deleteBioskop(
-//            @PathVariable(value = "idBioskop", required = true) String idBioskop,
-//            Model model
-//    ) {
-//        BioskopModel bioskop = bioskopService.getBioskopByIdBioskop(idBioskop);
-//        if (bioskop == null) {
-//            model.addAttribute("operasi", "Delete");
-//            return "error-id";
-//        }
-//        bioskopService.deleteBioskop(idBioskop);
-//        model.addAttribute("idBioskop", idBioskop);
-//        return "delete-bioskop";
-//    }
+    @GetMapping("/bioskop/delete/{noBioskop}")
+    public String deleteBioskopForm(
+            @PathVariable Long noBioskop,
+            Model model
+    ) {
+        System.out.println("1");
+        BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
+        if(bioskopService.cekBuka(bioskop)) {
+            System.out.println("2");
+            return "error-penjaga-related";
+        }
+        if(bioskopService.cekPenjaga(bioskop)) {
+            System.out.println("3");
+            model.addAttribute("bioskop", bioskop);
+            System.out.println(bioskop.getNamaBioskop());
+            return "form-delete-bioskop";
+        }
+        else {
+            System.out.println("4");
+            return "error-penjaga-related";
+        }
+    }
 
-//    // referensi: https://stackoverflow.com/questions/37746428/java-spring-how-to-handle-missing-required-request-parameters
-//    @ExceptionHandler(MissingServletRequestParameterException.class)
-//    public String handleMissingParams(MissingServletRequestParameterException ex) {
-//        return "error";
-//    }
+    @PostMapping("/bioskop/delete")
+    public String deleteBioskopSubmit(
+            @ModelAttribute BioskopModel bioskop,
+            Model model
+    ) {
+        model.addAttribute("noBioskop", bioskop.getNoBioskop());
+        bioskopService.deleteBioskop(bioskop);
+        return "delete-bioskop";
+    }
 }

@@ -12,12 +12,14 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
+                <h2>Delete Bioskop</h2>
                 <br>
-                <h2
-                        th:text="'Bioskop dengan nomor bioskop ' + ${noBioskop} + ' berhasil dihapus'">
-                </h2>
-                <a class="btn btn-primary" th:href="@{/bioskop/viewall}">Kembali</a>
-
+                <form th:action="@{/bioskop/delete}" th:object="${bioskop}" method="POST">
+                    <input type="hidden" th:field="*{noBioskop}" />
+                    <h4>"Apakah anda yakin untuk menghapus bioskop ini?"</h4>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <a class="btn btn-primary" href="/">Home</a>
+                </form>
             </div>
         </div>
     </div>
