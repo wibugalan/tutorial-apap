@@ -80,21 +80,21 @@ public class BioskopController {
             @PathVariable Long noBioskop,
             Model model
     ) {
-        System.out.println("1");
+//        System.out.println("1");
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
         if(bioskopService.cekBuka(bioskop)) {
-            System.out.println("2");
+//            System.out.println("2");
             return "error-penjaga-related";
         }
         if(bioskopService.cekPenjaga(bioskop)) {
-            System.out.println("3");
+//            System.out.println("3");
             model.addAttribute("bioskop", bioskop);
-            System.out.println(bioskop.getNamaBioskop());
+//            System.out.println(bioskop.getNamaBioskop());
             return "form-delete-bioskop";
         }
         else {
-            System.out.println("4");
-            return "error-penjaga-related";
+//            System.out.println("4");
+            return "error-ada-penjaga";
         }
     }
 
