@@ -47,10 +47,7 @@ public class BioskopServiceImpl implements BioskopService {
     @Override
     public boolean cekBuka(BioskopModel bioskop) {
         LocalTime localTime = LocalTime.now();
-        System.out.println(bioskop.getWaktuTutup());
-        System.out.println(bioskop.getWaktuBuka());
         if ((bioskop.getWaktuTutup().isAfter(localTime)) && (bioskop.getWaktuBuka().isBefore(localTime))) {
-            System.out.println("ini maish buka");
             return true;
         }
         return false;
