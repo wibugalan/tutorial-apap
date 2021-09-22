@@ -10,5 +10,5 @@ public interface BioskopService {
     List<BioskopModel> getBioskopList();
     void updateBioskop(BioskopModel bioskop);
     BioskopModel getBioskopByNoBioskop(Long noBioskop);
-//    void getPenjaga(BioskopModel bioskop);
+    boolean cekBuka(BioskopModel bioskop);
 }

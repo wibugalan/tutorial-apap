@@ -43,13 +43,16 @@ public class BioskopServiceImpl implements BioskopService {
         }
         return null;
     }
-//    @Override
-//    public void updatePenjaga(BioskopModel bioskop) {
-//        LocalDate localDate = LocalDate.now();
-//        for (BioskopModel b : getBioskopList()) {
-//            if (bioskop.getWaktuTutup().isBefore(LocalTime.from(localDate.now()))) {
-//
-//            }
-//        }
-//    }
+
+    @Override
+    public boolean cekBuka(BioskopModel bioskop) {
+        LocalTime localTime = LocalTime.now();
+        System.out.println(bioskop.getWaktuTutup());
+        System.out.println(bioskop.getWaktuBuka());
+        if ((bioskop.getWaktuTutup().isAfter(localTime)) && (bioskop.getWaktuBuka().isBefore(localTime))) {
+            System.out.println("ini maish buka");
+            return true;
+        }
+        return false;
+    }
 }

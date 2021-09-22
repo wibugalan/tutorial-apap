@@ -55,6 +55,9 @@ public class PenjagaController {
             Model model
     ) {
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
+        if (bioskopService.cekBuka(bioskop)) {
+            return "Error";
+        }
         for (PenjagaModel p: bioskop.getListPenjaga()) {
             if (p.getNoPenjaga() == noPenjaga) {
                 penjaga = p;
@@ -69,7 +72,6 @@ public class PenjagaController {
             @ModelAttribute PenjagaModel penjaga,
             Model model
     ) {
-//        penjagaService.addPenjaga(penjaga);
         penjagaService.updatePenjaga(penjaga);
         model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
         model.addAttribute("noPenjaga",penjaga.getNoPenjaga());
