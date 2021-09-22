@@ -3,6 +3,7 @@ package apap.tutorial.cineplux.service;
 import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.repository.BioskopDB;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -27,7 +28,8 @@ public class BioskopServiceImpl implements BioskopService {
 
     @Override
     public List<BioskopModel> getBioskopList(){
-        return bioskopDB.findAll();
+        // referensi: https://stackoverflow.com/questions/25486583/how-to-use-orderby-with-findall-in-spring-data
+        return bioskopDB.findAll(Sort.by("namaBioskop").ascending());
     }
 
     @Override
