@@ -155,9 +155,9 @@ public class BioskopController {
 //        return "delete-bioskop";
 //    }
 
-    // referensi: https://stackoverflow.com/questions/37746428/java-spring-how-to-handle-missing-required-request-parameters
-    @ExceptionHandler(MissingServletRequestParameterException.class)
-    public String handleMissingParams(MissingServletRequestParameterException ex) {
-        return "error";
-    }
+//    // referensi: https://stackoverflow.com/questions/37746428/java-spring-how-to-handle-missing-required-request-parameters
+//    @ExceptionHandler(MissingServletRequestParameterException.class)
+//    public String handleMissingParams(MissingServletRequestParameterException ex) {
+//        return "error";
+//    }
 }

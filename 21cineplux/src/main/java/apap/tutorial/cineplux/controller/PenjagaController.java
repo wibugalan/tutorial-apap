@@ -23,7 +23,7 @@ public class PenjagaController {
     @Autowired
     BioskopService bioskopService;
 
-    @GetMapping("/penjaga/add/{noBioskop")
+    @GetMapping("/penjaga/add/{noBioskop}")
     public String addPenjagaForm(
             @PathVariable Long noBioskop,
             Model model
