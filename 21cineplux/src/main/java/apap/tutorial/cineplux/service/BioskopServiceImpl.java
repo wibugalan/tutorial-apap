@@ -44,6 +44,7 @@ public class BioskopServiceImpl implements BioskopService {
         return null;
     }
 
+    // referensi: https://www.callicoder.com/how-to-compare-date-time-java/
     @Override
     public boolean cekBuka(BioskopModel bioskop) {
         LocalTime localTime = LocalTime.now();
