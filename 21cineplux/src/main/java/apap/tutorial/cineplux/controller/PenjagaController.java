@@ -2,6 +2,7 @@ package apap.tutorial.cineplux.controller;
 
 import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.model.PenjagaModel;
+import apap.tutorial.cineplux.repository.BioskopDB;
 import apap.tutorial.cineplux.service.BioskopService;
 import apap.tutorial.cineplux.service.PenjagaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,35 @@ public class PenjagaController {
         model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
         model.addAttribute("namaPenjaga",penjaga.getNamaPenjaga());
         return "add-penjaga";
+    }
+
+    @GetMapping("/penjaga/update/{noBioskop}/{noPenjaga}")
+    public String updatePenjagaForm(
+            @PathVariable Long noPenjaga,
+            @PathVariable Long noBioskop,
+            @ModelAttribute PenjagaModel penjaga,
+            Model model
+    ) {
+        BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
+        for (PenjagaModel p: bioskop.getListPenjaga()) {
+            if (p.getNoPenjaga() == noPenjaga) {
+                penjaga = p;
+            }
+        }
+        model.addAttribute("penjaga", penjaga);
+        return "form-update-penjaga";
+    }
+
+    @PostMapping("/penjaga/update")
+    public String updatePenjagaSubmit(
+            @ModelAttribute PenjagaModel penjaga,
+            Model model
+    ) {
+//        penjagaService.addPenjaga(penjaga);
+        penjagaService.updatePenjaga(penjaga);
+        model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
+        model.addAttribute("noPenjaga",penjaga.getNoPenjaga());
+        return "update-penjaga";
     }
 
 }

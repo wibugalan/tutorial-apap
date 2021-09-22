@@ -1,12 +1,15 @@
 package apap.tutorial.cineplux.service;
 
 import apap.tutorial.cineplux.model.BioskopModel;
+import apap.tutorial.cineplux.model.PenjagaModel;
 import apap.tutorial.cineplux.repository.BioskopDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.List;
 
@@ -40,4 +43,13 @@ public class BioskopServiceImpl implements BioskopService {
         }
         return null;
     }
+//    @Override
+//    public void updatePenjaga(BioskopModel bioskop) {
+//        LocalDate localDate = LocalDate.now();
+//        for (BioskopModel b : getBioskopList()) {
+//            if (bioskop.getWaktuTutup().isBefore(LocalTime.from(localDate.now()))) {
+//
+//            }
+//        }
+//    }
 }

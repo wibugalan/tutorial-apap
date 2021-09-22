@@ -4,4 +4,5 @@ import apap.tutorial.cineplux.model.PenjagaModel;
 
 public interface PenjagaService {
     void addPenjaga(PenjagaModel penjaga);
+    void updatePenjaga(PenjagaModel penjaga);
 }
