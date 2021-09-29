@@ -24,19 +24,21 @@ public class FilmModel implements Serializable {
     private Long noFilm;
 
     @NotNull
-    @Size
+    @Size(max = 30)
     @Column(nullable = false)
     private String namaFilm;
+
+    @NotNull
+    @Size(max = 50)
+    @Column(nullable = false)
+    private String deskripsiFilm;
 
     @NotNull
     @Column(nullable = false)
     private Boolean isDisplaying;
 
-    @NotNull
-    @Size
-    @Column(nullable = false)
-    private String deskripsiFilm;
-
+    //Relasi dengan BioskopModel
     @ManyToMany(mappedBy = "listFilm")
     List<BioskopModel> listBioskop;
+
 }

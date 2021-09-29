@@ -22,6 +22,18 @@ public class BioskopController {
 
     @GetMapping("/bioskop/add")
     public String addBioskopForm(Model model) {
+        model.addAttribute("jumlah", 1);
+        model.addAttribute("bioskop", new BioskopModel());
+        return "form-add-bioskop";
+    }
+
+    @PostMapping("/bioskop/add")
+    public String addRowOnClick(
+            @ModelAttribute int jumlah,
+            Model model
+    ) {
+        jumlah = jumlah + 1;
+        model.addAttribute("jumlah",jumlah);
         model.addAttribute("bioskop", new BioskopModel());
         return "form-add-bioskop";
     }

@@ -38,6 +38,27 @@
                     <input required class="form-control" type="time" name="waktuTutup" />
                     <br><br>
 
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nama Film</th>
+                            <th>
+                                <form th:action="@{/bioskop/add}" th:object="${jumlah}" method="POST">
+                                <button class="btn btn-primary" type="submit">Tambah Row</button>
+                                </form>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="i: ${#numbers.sequence(0, jumlah-1)}">
+                            <td>asdasd</td>
+                            <td>
+                                <a class="btn btn-danger">Detail</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
                     <button class="btn btn-primary" type="submit">Submit</button>
                     <a class="btn btn-primary" href="/">Home</a>
                 </form>
