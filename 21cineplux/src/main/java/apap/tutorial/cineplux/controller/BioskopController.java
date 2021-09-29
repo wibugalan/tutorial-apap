@@ -1,6 +1,8 @@
 package apap.tutorial.cineplux.controller;
 
+import apap.tutorial.cineplux.model.FilmModel;
 import apap.tutorial.cineplux.model.PenjagaModel;
+import apap.tutorial.cineplux.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,10 @@ public class BioskopController {
     @Autowired
     private BioskopService bioskopService;
 
+    @Qualifier("filmServiceImpl")
+    @Autowired
+    private FilmService filmService;
+
     @GetMapping("/bioskop/add")
     public String addBioskopForm(Model model) {
         model.addAttribute("jumlah", 0);
@@ -33,6 +39,7 @@ public class BioskopController {
             @RequestParam(value = "ops") String ops,
             Model model
     ) {
+        List<FilmModel> listFilm =  filmService.getListFilm();
         if (ops.equals(",true")) {
             jumlah = jumlah + 1;
         }
@@ -43,6 +50,7 @@ public class BioskopController {
             jumlah = 0;
         }
         model.addAttribute("bioskop", new BioskopModel());
+        model.addAttribute("listFilm", listFilm);
         model.addAttribute("jumlah", jumlah);
         return "form-add-bioskop";
 

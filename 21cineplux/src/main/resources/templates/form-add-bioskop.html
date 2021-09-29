@@ -57,12 +57,16 @@
                             <div th:if="*{jumlah != 0}">
                             <tbody>
                             <tr th:each="i: ${#numbers.sequence(0, jumlah-1)}">
-                                <td>asdasd</td>
+                                <td>
+                                    <select name="namaFilm" class="form-control">
+                                        <option th:each="film : ${listFilm}" th:value="${film.noFilm}" th:text="${film.namaFilm}"></option>
+                                    </select>
+                                </td>
                                 <td>
                                     <form th:action="@{/bioskop/again(jumlah=${jumlah},ops=${ops})}" method="POST" >
                                         <input type="hidden" th:value="${jumlah}" name="jumlah" />
                                         <input type="hidden" th:value="${false}" name="ops" />
-                                        <button class="btn btn-primary" type="submit">Tambah Row</button>
+                                        <button class="btn btn-danger" type="submit">Hapus Row</button>
                                     </form>
                                 </td>
                             </tr>
