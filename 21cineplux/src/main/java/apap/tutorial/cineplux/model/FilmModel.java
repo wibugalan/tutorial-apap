@@ -32,6 +32,11 @@ public class FilmModel implements Serializable {
     @Column(nullable = false)
     private Boolean isDisplaying;
 
+    @NotNull
+    @Size
+    @Column(nullable = false)
+    private String deskripsiFilm;
+
     @ManyToMany(mappedBy = "listFilm")
     List<BioskopModel> listBioskop;
 }
