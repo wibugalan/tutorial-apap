@@ -22,20 +22,30 @@ public class BioskopController {
 
     @GetMapping("/bioskop/add")
     public String addBioskopForm(Model model) {
-        model.addAttribute("jumlah", 1);
+        model.addAttribute("jumlah", 0);
         model.addAttribute("bioskop", new BioskopModel());
         return "form-add-bioskop";
     }
 
-    @PostMapping("/bioskop/add")
-    public String addRowOnClick(
-            @ModelAttribute int jumlah,
+    @PostMapping("/bioskop/again")
+    public String addFilmBioskop(
+            @RequestParam(value = "jumlah") int jumlah,
+            @RequestParam(value = "ops") String ops,
             Model model
     ) {
-        jumlah = jumlah + 1;
-        model.addAttribute("jumlah",jumlah);
+        if (ops.equals(",true")) {
+            jumlah = jumlah + 1;
+        }
+        else if (ops.equals(",false")) {
+            jumlah = jumlah -1;
+        }
+        if (jumlah <0) {
+            jumlah = 0;
+        }
         model.addAttribute("bioskop", new BioskopModel());
+        model.addAttribute("jumlah", jumlah);
         return "form-add-bioskop";
+
     }
 
     @PostMapping("/bioskop/add")

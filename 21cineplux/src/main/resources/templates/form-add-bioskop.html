@@ -17,51 +17,69 @@
             <div class="justify-content-center">
                 <h2>Tambah Bioskop</h2>
                 <br>
-                <form th:action="@{/bioskop/add}" th:object="${bioskop}" method="POST">
+                <form id="main-form" th:action="@{/bioskop/add}" th:object="${bioskop}" method="POST"></form>
                     Nama Bioskop : <br>
-                    <input required class="form-control" type="text" name="namaBioskop" />
+                    <input required class="form-control" type="text" name="namaBioskop" form="main-form"/>
                     <br><br>
 
                     Alamat Bioskop: <br>
-                    <input required class="form-control" type="text" name="alamatBioskop" />
+                    <input required class="form-control" type="text" name="alamatBioskop" form="main-form"/>
                     <br><br>
 
                     Jumlah Studio : <br>
-                    <input required min="0" class="form-control" type="number" name="jumlahStudio" />
+                    <input required min="0" class="form-control" type="number" name="jumlahStudio" form="main-form"/>
                     <br><br>
 
                     Waktu Buka : <br>
-                    <input required class="form-control" type="time" name="waktuBuka" />
+                    <input required class="form-control" type="time" name="waktuBuka" form="main-form"/>
                     <br><br>
 
                     Waktu Tutup : <br>
-                    <input required class="form-control" type="time" name="waktuTutup" />
+                    <input required class="form-control" type="time" name="waktuTutup" form="main-form"/>
                     <br><br>
 
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Nama Film</th>
-                            <th>
-                                <form th:action="@{/bioskop/add}" th:object="${jumlah}" method="POST">
+                    <div th:if="*{jumlah != 0}">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nama Film</th>
+                                <th>
+                                    <div>
+                                    <form th:action="@{/bioskop/again(jumlah=${jumlah},ops=${ops})}" method="POST">
+                                        <input type="hidden" th:value="${jumlah}" name="jumlah" />
+                                        <input type="hidden" th:value="${true}" name="ops" />
+                                    <button class="btn btn-primary" type="submit">Tambah Row</button>
+                                    </form>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <div th:if="*{jumlah != 0}">
+                            <tbody>
+                            <tr th:each="i: ${#numbers.sequence(0, jumlah-1)}">
+                                <td>asdasd</td>
+                                <td>
+                                    <form th:action="@{/bioskop/again(jumlah=${jumlah},ops=${ops})}" method="POST" >
+                                        <input type="hidden" th:value="${jumlah}" name="jumlah" />
+                                        <input type="hidden" th:value="${false}" name="ops" />
+                                        <button class="btn btn-primary" type="submit">Tambah Row</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                        <div th:unless="*{jumlah != 0}">
+                            <h2>Belum ada film yang dipilih</h2>
+                            <form th:action="@{/bioskop/again(jumlah=${jumlah},ops=${ops})}" method="POST">
+                                <input type="hidden" th:value="${jumlah}" name="jumlah" />
+                                <input type="hidden" th:value="${true}" name="ops" />
                                 <button class="btn btn-primary" type="submit">Tambah Row</button>
-                                </form>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="i: ${#numbers.sequence(0, jumlah-1)}">
-                            <td>asdasd</td>
-                            <td>
-                                <a class="btn btn-danger">Detail</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                            </form>
+                        </div>
+                <br><br>
+                    <button form="main-form" class="btn btn-primary" type="submit">Submit</button>
                     <a class="btn btn-primary" href="/">Home</a>
-                </form>
             </div>
         </div>
     </div>
