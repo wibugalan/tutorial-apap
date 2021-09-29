@@ -2,6 +2,41 @@
 ## Authors
 * **Muhammad Marsha Prawira** - *1906353864* - *C*
 ---
+## Tutorial 3
+### What I have learned today
+Saya belajar mengenai pengaplikasian konsep MVC(Model View Controller) pada Springboot serta CRUD data dengan menggunakan database pada MySql.
+### Pertanyaan
+1. Tolong jelaskan secara singkat apa kegunaan dari anotasi-anotasi yang ada pada model (@AllArgsConstructor, @NoArgsConstructor, @Setter, @Getter, @Entity, @Table)
+= @AllArgsConstructor digunakan untuk membuat konstruktor yang membutuhkan argumen untuk setiap field.
+@NoArgsConstructor digunakan untuk membuat konstruktor yang tidak membutuhkan argumen atau parameter untuk fieldnya.
+@Setter membuat fungsi setter pada objek (menentukan nilai parameter)
+@Getter membuat fungsi getter pada objek (mendapatkan nilai parameter)
+@Entity membuat entitas agar dapat direkognisi oleh JPA dengan nama default sesuai nama class. entity ini akan mengisi row pada tabel
+referensi: https://www.baeldung.com/jpa-entities
+@Table membuat sebuah tabel dari yang akan berisi entitas-entitas
+
+2. Pada class BioskopDB, terdapat method findByNoBioskop, apakah kegunaan dari method tersebut?
+= Method tersebut akan mengembalikan bioskop dengan parameter noBioskop dari database
+
+3. Jelaskan perbedaan kegunaan dari anotasi @JoinTable dan @JoinColumn
+= @JoinTable itu kita gunakan apabila kita ingin membuat sebuah hubungan antar entity a dengan entity b, sedangkan @JoinColumn hanya pada salah satu kolom dengan menggunakan foreign key antar entitas a dan entitas b.
+referensi: https://stackoverflow.com/questions/30288464/when-should-i-use-joincolumn-or-jointable-with-jpa
+
+4. Pada class PenjagaModel, digunakan anotasi @JoinColumn pada atribut bioskop, apa kegunaan dari name, referencedColumnName, dan nullable dalam anotasi tersebut? dan apa perbedaan nullable dan penggunaan anotasi @NotNull
+= @JoinColumn tersebut akan membuat foreign key yang diambil dari tabel. name akan menentukan nama kolom, referencedColumnName akan menentukan kolom tujuan yang menjadi referensi foreign key, nullable berarti isi dari kolom tersebut dapat berisi null. nullable mengatur definisi restriksi pada tabel, sedangnkan @NotNull mengatur restriksi saat mengisi entity.
+referensi: https://thorben-janssen.com/hibernate-tips-whats-the-difference-between-column-nullable-false-and-notnull
+
+5. Jelaskan kegunaan FetchType.LAZY, CascadeType.ALL, dan FetchType.EAGER
+= 
+FetchType.LAZY atau Lazy Loading merupakan pola desain yang digunakan untuk menunda inisialisasi objek selama mungkin dan baru diinisialisasi saat dibutuhkan
+FetchType.EAGER atau Eager Loading merupakan pola desain yang digunakan untuk melakukan inisialisasi objek secepat mungkin 
+CascadeType.ALL akan melakukan semua operasi yang diperintahkan
+referensi: https://qastack.id/programming/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
+
+### What I did not understand
+Konsep penggunaan repository.
+
+---
 ## Tutorial 2
 ### What I have learned today
 Saya belajar mengenai pengaplikasian konsep MVC(Model View Controller) pada Springboot serta CRUD data tanpa database.

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 
 <head>
-    <title>Error</title>
+    <title>21 Cineplux</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 </head>
@@ -12,10 +12,15 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <h2>Error</h2>
-                <h2 text="Terdapat kesalahan saat mengakses halaman"></h2>
+                <h2>Delete Bioskop</h2>
+                <br>
+                <form th:action="@{/bioskop/delete}" th:object="${bioskop}" method="POST">
+                    <input type="hidden" th:field="*{noBioskop}" />
+                    <h4>"Apakah anda yakin untuk menghapus bioskop ini?"</h4>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <a class="btn btn-primary" href="/">Home</a>
+                </form>
             </div>
-            <a class="btn btn-primary" href="/">kembali</a>
         </div>
     </div>
 </div>
