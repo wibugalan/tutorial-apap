@@ -14,19 +14,28 @@
 <div class="container">
   <h2>Daftar Seluruh Film</h2>
   <br>
-  <div th:each="film : ${listFilm}" class="card m-4 p-4">
-    <div class="card-body">
-      <div class="justify-content-center">
-        <p th:text="'Nomor Film : ' + ${film.noFilm}"></p>
-        <p th:text="'Nama Film : ' + ${film.namaFilm}"></p>
-        <p th:text="'Deskripsi Film : ' + ${film.deskripsiFilm}"></p>
-        <p th:if="${film.isDisplaying == 0}" th:text="'Sedang Tayang : YA'"></p>
-        <p th:if="${film.isDisplaying == 1}" th:text="'Sedang Tayang : TIDAK'"></p>
-        <br>
-      </div>
-    </div>
-    <br>
-  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>No</th>
+      <th>No Film</th>
+      <th>Nama Film</th>
+      <th>Deskripsi Film</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="film, iterationStatus : ${listFilm}"
+        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+      <td th:text="${iterationStatus.count}"></td>
+      <td th:text="${film.noFilm}"></td>
+      <td th:text="${film.namaFilm}"></td>
+      <td th:text="${film.deskripsiFilm}"></td>
+      <td th:if="${film.isDisplaying == true}" th:text="'Sedang Tayang : YA'"></td>
+      <td th:if="${film.isDisplaying == false}" th:text="'Sedang Tayang : TIDAK'"></td>
+    </tr>
+    </tbody>
+  </table>
   <a class="btn btn-primary" href="/">Home</a>
 </div>
 
