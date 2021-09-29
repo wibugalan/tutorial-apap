@@ -35,8 +35,15 @@
     </button>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-            <a class="nav-item nav-link active text-secondary" th:href="@{/}">
-                Home<span class="st-only">(current)</span>
+<!--            referensi: https://stackoverflow.com/questions/28559817/displaying-active-navigation-based-on-contextual-data-->
+            <a class="nav-item nav-link" th:href="@{/}" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'font-weight-bold' : ''}">
+            Home<span class="st-only"></span>
+            </a>
+            <a class="nav-item nav-link" th:href="@{/bioskop/viewall}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/bioskop') ? 'font-weight-bold' : ''}">
+                View Bioskop<span class="st-only"></span>
+            </a>
+            <a class="nav-item nav-link" th:href="@{/film/viewall}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/film') ? 'font-weight-bold' : ''}">
+                View Film<span class="st-only"></span>
             </a>
         </ul>
         <form class="form-inline my-2 my-lg-0" th:action="@{/bioskop/view}" method="GET">
