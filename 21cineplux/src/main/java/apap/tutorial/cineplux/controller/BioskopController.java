@@ -28,13 +28,16 @@ public class BioskopController {
 
     @GetMapping("/bioskop/add")
     public String addBioskopForm(Model model) {
+        List<FilmModel> listFilm =  filmService.getListFilm();
         model.addAttribute("jumlah", 0);
         model.addAttribute("bioskop", new BioskopModel());
+        model.addAttribute("listFilm", listFilm);
         return "form-add-bioskop";
     }
 
     @PostMapping("/bioskop/again")
     public String addFilmBioskop(
+            @ModelAttribute BioskopModel bioskop,
             @RequestParam(value = "jumlah") int jumlah,
             @RequestParam(value = "ops") String ops,
             Model model
@@ -49,11 +52,10 @@ public class BioskopController {
         if (jumlah <0) {
             jumlah = 0;
         }
-        model.addAttribute("bioskop", new BioskopModel());
+        model.addAttribute("bioskop", bioskop);
         model.addAttribute("listFilm", listFilm);
         model.addAttribute("jumlah", jumlah);
         return "form-add-bioskop";
-
     }
 
     @PostMapping("/bioskop/add")
