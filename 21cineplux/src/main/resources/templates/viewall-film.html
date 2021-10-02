@@ -12,31 +12,22 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container">
-  <div class="card m-4 p-4">
+  <h2>Daftar Seluruh Film</h2>
+  <br>
+  <div th:each="film : ${listFilm}" class="card m-4 p-4">
     <div class="card-body">
       <div class="justify-content-center">
-        <h2>Tambah Penjaga</h2>
+        <p th:text="'Nomor Film : ' + ${film.noFilm}"></p>
+        <p th:text="'Nama Film : ' + ${film.namaFilm}"></p>
+        <p th:text="'Deskripsi Film : ' + ${film.deskripsiFilm}"></p>
+        <p th:if="${film.isDisplaying == true}" th:text="'Sedang Tayang : YA'"></p>
+        <p th:if="${film.isDisplaying == false}" th:text="'Sedang Tayang : TIDAK'"></p>
         <br>
-        <form th:action="@{/penjaga/add}" th:object="${penjaga}" method="POST">
-          <input type="hidden" th:field="*{bioskop}" />
-
-          Nama Penjaga : <br>
-          <input required class="form-control" type="text" name="namaPenjaga" />
-          <br>
-
-          Jenis Kelamin : <br>
-          <select name="jenisKelamin">
-            <option value="0">Perempuan</option>
-            <option value="1">Laki-laki</option>
-          </select>
-          <br><br>
-
-          <button class="btn btn-primary" type="submit">Submit</button>
-          <a class="btn btn-primary" href="/">Home</a>
-        </form>
       </div>
     </div>
+    <br>
   </div>
+  <a class="btn btn-primary" href="/">Home</a>
 </div>
 
 </body>

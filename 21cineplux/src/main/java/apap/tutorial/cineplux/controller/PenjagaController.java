@@ -100,12 +100,14 @@ public class PenjagaController {
 
     @PostMapping("/penjaga/delete")
     public String deletePenjagaSubmit(
-            @ModelAttribute PenjagaModel penjaga,
+            @ModelAttribute BioskopModel bioskop,
             Model model
     ) {
-        model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
-        model.addAttribute("noPenjaga",penjaga.getNoPenjaga());
-        penjagaService.deletePenjaga(penjaga);
+        System.out.println(bioskop.getNoBioskop());
+        model.addAttribute("noBioskop", bioskop.getNoBioskop());
+        for (PenjagaModel p : bioskop.getListPenjaga()) {
+            penjagaService.deletePenjaga(p);
+        }
         return "delete-penjaga";
     }
 

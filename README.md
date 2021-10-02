@@ -2,6 +2,22 @@
 ## Authors
 * **Muhammad Marsha Prawira** - *1906353864* - *C*
 ---
+## Tutorial 4
+### What I have learned today
+Saya belajar mengenai pengaplikasian thymleaf yang menurut saya cukup advanced apabila dibandingkan dengan tutorial sebelumnya
+### Pertanyaan
+1. Jelaskan perbedaan th:include dan th:replace!
+= include memanggil isi dari fragment kedalam tempat th:include diletakan, sedangkan replace akan menggantikan elemen didalamnya dan menjadi parent dari lokasinya diletakan.
+
+2. Jelaskan apa fungsi dari th:object!
+= saat mengerjakan tutor ini, th:object berperan untuk mengoper objek pada spring dan template html.
+
+3. Jelaskan perbedaan dari * dan $ pada saat penggunaan th:object! Kapan harus dipakai?
+= * digunakan saat menyatakan sebuah selection, sedangkan $ untuk menyatakan sebuah variabel atau nilai. * digunakan setelah objek ditentukan sebelumnya, sedangkan $ digunakan untuk menyatakan variabel(lebih luas dan tergeneralisasi).
+Referensi: https://www.thymeleaf.org/doc/articles/standarddialect5minutes.html
+### What I did not understand
+saya sedikit kebingungan dalam mengoper-oper list film.
+---
 ## Tutorial 3
 ### What I have learned today
 Saya belajar mengenai pengaplikasian konsep MVC(Model View Controller) pada Springboot serta CRUD data dengan menggunakan database pada MySql.
