@@ -20,13 +20,14 @@ public class PenjagaRestController {
     private PenjagaRestService penjagaRestService;
 
     @PostMapping(value = "/penjaga")
-    private PenjagaModel createPenjaga(@Valid @RequestBody PenjagaModel penjaga, BindingResult bindingResult) {
+    private ResponseEntity createPenjaga(@Valid @RequestBody PenjagaModel penjaga, BindingResult bindingResult) {
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
             );
         } else {
-            return penjagaRestService.createPenjaga(penjaga);
+            penjagaRestService.createPenjaga(penjaga);
+            return ResponseEntity.ok("Create penjaga success");
         }
     }
 
@@ -45,7 +46,7 @@ public class PenjagaRestController {
     private ResponseEntity deletePenjaga(@PathVariable("noPenjaga") Long noPenjaga){
         try{
             penjagaRestService.deletePenjaga(noPenjaga);
-            return ResponseEntity.ok("Penjaga with No Penjaga " + String.valueOf(noPenjaga) + " Deleted!");
+            return ResponseEntity.ok("Penjaga has been deleted");
         } catch (NoSuchElementException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Penjaga with No Penjaga " + String.valueOf(noPenjaga) + " Not Found.");
@@ -56,9 +57,10 @@ public class PenjagaRestController {
     }
 
     @PutMapping(value = "/penjaga/{noPenjaga}")
-    private PenjagaModel updatePenjaga(@PathVariable("noPenjaga") Long noPenjaga, @RequestBody PenjagaModel penjaga){
+    private ResponseEntity updatePenjaga(@PathVariable("noPenjaga") Long noPenjaga, @RequestBody PenjagaModel penjaga){
         try{
-            return penjagaRestService.updatePenjaga(noPenjaga, penjaga);
+            penjagaRestService.updatePenjaga(noPenjaga, penjaga);
+            return ResponseEntity.ok("Update penjaga success!");
         } catch (NoSuchElementException e){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Penjaga with No Penjaga " + String.valueOf(noPenjaga) + " Not Found."
@@ -69,5 +71,18 @@ public class PenjagaRestController {
     @GetMapping(value = "/list-penjaga")
     private List<PenjagaModel> retrieveListPenjaga() {
         return penjagaRestService.retrieveListPenjaga();
+    }
+
+    @GetMapping(value = "/penjaga/umur/{noPenjaga}")
+    private PenjagaModel generateUmur(@PathVariable("noPenjaga") Long noPenjaga) {
+        PenjagaModel penjaga = penjagaRestService.getPenjagaByNoPenjaga(noPenjaga);
+        try {
+            return penjagaRestService.generateUmur(noPenjaga, penjaga);
+        }
+        catch(UnsupportedOperationException e){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Bioskop is still open!"
+            );
+        }
     }
 }

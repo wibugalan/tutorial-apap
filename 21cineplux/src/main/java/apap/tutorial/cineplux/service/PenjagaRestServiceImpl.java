@@ -2,16 +2,10 @@ package apap.tutorial.cineplux.service;
 
 import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.model.PenjagaModel;
-import apap.tutorial.cineplux.repository.BioskopDB;
 import apap.tutorial.cineplux.repository.PenjagaDB;
-import apap.tutorial.cineplux.rest.BioskopDetail;
-import apap.tutorial.cineplux.rest.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 import java.time.LocalTime;
@@ -65,5 +59,24 @@ public class PenjagaRestServiceImpl implements PenjagaRestService{
         } else {
             throw new UnsupportedOperationException("Bioskop still Open!");
         }
+    }
+
+    @Override
+    public PenjagaModel generateUmur(Long noPenjaga, PenjagaModel penjagaUpdate) {
+        PenjagaModel penjaga = getPenjagaByNoPenjaga(noPenjaga);
+        BioskopModel bioskop = penjaga.getBioskop();
+        LocalTime now = LocalTime.now();
+        final String uri = "https://api.agify.io/?name=" + String.valueOf(penjaga.getNamaPenjaga().split(" ")[0]);
+
+        if(now.isBefore(bioskop.getWaktuBuka()) || now.isAfter(bioskop.getWaktuTutup())) {
+            RestTemplate restTemplate = new RestTemplate();
+            String result = restTemplate.getForObject(uri, String.class);
+            String umur = result.split(",")[1].substring(6, result.split(",")[1].length());
+            penjaga.setUmur(umur);
+            penjagaDB.save(penjaga);
+        } else {
+            throw new UnsupportedOperationException("Bioskop still open");
+        }
+        return penjagaDB.findByNoPenjaga(noPenjaga).get();
     }
 }

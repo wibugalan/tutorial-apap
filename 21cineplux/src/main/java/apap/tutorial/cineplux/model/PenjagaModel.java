@@ -34,6 +34,8 @@ public class PenjagaModel implements Serializable {
     @Column(nullable = false)
     private Integer jenisKelamin;
 
+    private String umur;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "no_bioskop", referencedColumnName = "noBioskop", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
