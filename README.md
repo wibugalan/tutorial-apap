@@ -2,6 +2,25 @@
 ## Authors
 * **Muhammad Marsha Prawira** - *1906353864* - *C*
 ---
+## Tutorial 5
+### What I have learned today
+Saya belajar penggunaan API dan bagaimana mengeceknya melalui POSTMAN
+### Pertanyaan
+1. Apa itu Postman? Apa kegunaannya?
+= Postman dapat digunakan untuk menguji atau testing endpoint (API). Postman juga memberikan kemudahan lain seperti penyimpanan endpoint pada collection, environment yang diubah-ubah, dan lain-lainnya.
+2. Jelaskan fungsi dari anotasi @JsonIgnoreProperties dan @JsonProperty.
+= 
+@JsonIgnoreProperties digunakan untuk mengabaikan pemrosesan properti JSON yang dibaca saat deserialisasi atau serialisasi JSON.
+@JsonProperty digunakan untuk memetakan property dengan JSON saat deserialisasi atau serialisasi JSON. By default, if you try to 
+3. Apa kegunaan atribut WebClient?
+= WebClient memberikan cara untuk melakukan pengiriman atau penerimaan data dari lokal, intranet, atau Internet yang teridentifikasi oleh URL yang diberikan.
+4. Apa itu ResponseEntity dan BindingResult? Apa kegunaannya?
+= 
+ResponseEntity berguna untuk memberikan response HTTP dari sebuah panggilan fungsi.
+BindingResult berguna untuk memberikan informasi mengenai kesalahan dalam melakukan pemanggilan fungsi.
+### What I did not understand
+saya sedikit kebingungan dalam konsep webclient.
+---
 ## Tutorial 4
 ### What I have learned today
 Saya belajar mengenai pengaplikasian thymleaf yang menurut saya cukup advanced apabila dibandingkan dengan tutorial sebelumnya
