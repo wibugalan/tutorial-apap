@@ -51,6 +51,7 @@ public class PenjagaRestServiceImpl implements PenjagaRestService{
         PenjagaModel penjaga = getPenjagaByNoPenjaga(noPenjaga);
         penjaga.setNamaPenjaga(penjagaUpdate.getNamaPenjaga());
         penjaga.setJenisKelamin(penjagaUpdate.getJenisKelamin());
+        penjaga.setBioskop(penjagaUpdate.getBioskop());
         return penjagaDB.save(penjaga);
     }
 
