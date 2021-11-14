@@ -62,6 +62,11 @@ public class PenjagaRestServiceImpl implements PenjagaRestService{
     }
 
     @Override
+    public void deletePenjagaAll() {
+        penjagaDB.deleteAll();
+    }
+
+    @Override
     public PenjagaModel generateUmur(Long noPenjaga, PenjagaModel penjagaUpdate) {
         PenjagaModel penjaga = getPenjagaByNoPenjaga(noPenjaga);
         BioskopModel bioskop = penjaga.getBioskop();

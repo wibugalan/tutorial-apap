@@ -56,6 +56,17 @@ public class PenjagaRestController {
         }
     }
 
+    @DeleteMapping(value = "/penjaga")
+    private ResponseEntity deletePenjagaAll() {
+        try{
+            penjagaRestService.deletePenjagaAll();
+            return ResponseEntity.ok("Penjaga has been deleted");
+        } catch (NoSuchElementException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Penjaga with No Penjaga Not Found.");
+        }
+    }
+
     @PutMapping(value = "/penjaga/{noPenjaga}")
     private ResponseEntity updatePenjaga(@PathVariable("noPenjaga") Long noPenjaga, @RequestBody PenjagaModel penjaga){
         try{
