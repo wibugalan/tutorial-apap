@@ -2,9 +2,13 @@ package apap.tutorial.cineplux.controller;
 
 import apap.tutorial.cineplux.model.FilmModel;
 import apap.tutorial.cineplux.model.PenjagaModel;
+import apap.tutorial.cineplux.model.UserModel;
 import apap.tutorial.cineplux.service.FilmService;
+import apap.tutorial.cineplux.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -25,6 +29,10 @@ public class BioskopController {
     @Qualifier("filmServiceImpl")
     @Autowired
     private FilmService filmService;
+
+    @Qualifier("userServiceImpl")
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/bioskop/add")
     public String addBioskopForm(Model model) {
@@ -86,7 +94,13 @@ public class BioskopController {
         model.addAttribute("listFilm", listFilm);
         model.addAttribute("bioskop", bioskop);
         model.addAttribute("listPenjaga", listPenjaga);
-        return "view-bioskop";
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getAuthorities().toString().equals("[MANAGER]")) {
+            return "view-bioskop";
+        }
+        return "view-bioskop-non-manager";
+
     }
 
     @GetMapping("/bioskop/update/{noBioskop}")

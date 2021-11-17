@@ -2,17 +2,23 @@ package apap.tutorial.cineplux.controller;
 
 import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.model.PenjagaModel;
+import apap.tutorial.cineplux.model.UserModel;
 import apap.tutorial.cineplux.repository.BioskopDB;
 import apap.tutorial.cineplux.service.BioskopService;
 import apap.tutorial.cineplux.service.PenjagaService;
+import apap.tutorial.cineplux.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class PenjagaController {
@@ -24,6 +30,10 @@ public class PenjagaController {
     @Autowired
     BioskopService bioskopService;
 
+    @Qualifier("userServiceImpl")
+    @Autowired
+    UserService userService;
+
     @GetMapping("/penjaga/add/{noBioskop}")
     public String addPenjagaForm(
             @PathVariable Long noBioskop,
@@ -33,7 +43,12 @@ public class PenjagaController {
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
         penjaga.setBioskop(bioskop);
         model.addAttribute("penjaga",penjaga);
-        return "form-add-penjaga";
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getAuthorities().toString().equals("[MANAGER]")) {
+            return "form-add-penjaga";
+        }
+        return "access-denied";
     }
 
     @PostMapping("/penjaga/add")
@@ -54,17 +69,22 @@ public class PenjagaController {
             @ModelAttribute PenjagaModel penjaga,
             Model model
     ) {
-        BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
-        if (bioskopService.cekBuka(bioskop)) {
-            return "error-penjaga-related";
-        }
-        for (PenjagaModel p: bioskop.getListPenjaga()) {
-            if (p.getNoPenjaga() == noPenjaga) {
-                penjaga = p;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getAuthorities().toString().equals("[MANAGER]")) {
+            BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
+            if (bioskopService.cekBuka(bioskop)) {
+                return "error-penjaga-related";
             }
+            for (PenjagaModel p: bioskop.getListPenjaga()) {
+                if (p.getNoPenjaga() == noPenjaga) {
+                    penjaga = p;
+                }
+            }
+            model.addAttribute("penjaga", penjaga);
+            return "form-update-penjaga";
         }
-        model.addAttribute("penjaga", penjaga);
-        return "form-update-penjaga";
+        return "access-denied";
+
     }
 
     @PostMapping("/penjaga/update")
@@ -85,17 +105,23 @@ public class PenjagaController {
             @ModelAttribute PenjagaModel penjaga,
             Model model
     ) {
-        BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
-        if (bioskopService.cekBuka(bioskop)) {
-            return "error-penjaga-related";
-        }
-        for (PenjagaModel p: bioskop.getListPenjaga()) {
-            if (p.getNoPenjaga() == noPenjaga) {
-                penjaga = p;
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getAuthorities().toString().equals("[MANAGER]")) {
+            BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
+            if (bioskopService.cekBuka(bioskop)) {
+                return "error-penjaga-related";
             }
+            for (PenjagaModel p: bioskop.getListPenjaga()) {
+                if (p.getNoPenjaga() == noPenjaga) {
+                    penjaga = p;
+                }
+            }
+            model.addAttribute("penjaga", penjaga);
+            return "form-delete-penjaga";
         }
-        model.addAttribute("penjaga", penjaga);
-        return "form-delete-penjaga";
+        return "access-denied";
+
     }
 
     @PostMapping("/penjaga/delete")
