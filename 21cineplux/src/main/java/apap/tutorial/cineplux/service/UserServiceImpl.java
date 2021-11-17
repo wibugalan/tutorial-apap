@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService{
         userDB.delete(user);
     }
 
+    @Override
+    public UserModel getByUsername(String uname) {
+        return userDB.findByUsername(uname);
+    }
+
 }

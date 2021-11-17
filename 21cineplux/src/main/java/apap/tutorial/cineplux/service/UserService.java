@@ -11,4 +11,5 @@ public interface UserService {
     List<UserModel> getAll();
     UserModel getById(String id);
     void deleteUser(UserModel user);
+    UserModel getByUsername(String uname);
 }
