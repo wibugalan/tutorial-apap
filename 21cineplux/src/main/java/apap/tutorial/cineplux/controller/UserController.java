@@ -1,5 +1,6 @@
 package apap.tutorial.cineplux.controller;
 
+import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.model.RoleModel;
 import apap.tutorial.cineplux.model.UserModel;
 import apap.tutorial.cineplux.service.RoleService;
@@ -9,10 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,11 +25,16 @@ public class UserController {
 
     @GetMapping(value = "/add")
     private String addUserFormPage(Model model) {
-        UserModel user = new UserModel();
-        List<RoleModel> listRole = roleService.getListRole();
-        model.addAttribute("user", user);
-        model.addAttribute("listRole", listRole);
-        return "form-add-user";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getAuthorities().toString().equals("[ADMIN]")) {
+            UserModel user = new UserModel();
+            List<RoleModel> listRole = roleService.getListRole();
+            model.addAttribute("user", user);
+            model.addAttribute("listRole", listRole);
+            return "form-add-user";
+        }
+
+        return "access-denied";
     }
 
     @PostMapping(value = "/addUser")
@@ -50,5 +53,26 @@ public class UserController {
             return "list-user";
         }
         return "access-denied";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBioskopForm(
+            @PathVariable String id,
+            Model model
+    ) {
+        UserModel user = userService.getById(id);
+        model.addAttribute("id", user.getId());
+        model.addAttribute("user", user);
+        return "form-delete-user";
+    }
+
+    @PostMapping("/delete")
+    public String deleteBioskopSubmit(
+            @ModelAttribute UserModel user,
+            Model model
+    ) {
+        model.addAttribute("nama", user.getNama());
+        userService.deleteUser(user);
+        return "delete-user";
     }
 }

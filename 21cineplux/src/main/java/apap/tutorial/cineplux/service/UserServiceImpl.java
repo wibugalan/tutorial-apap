@@ -1,5 +1,6 @@
 package apap.tutorial.cineplux.service;
 
+import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.model.UserModel;
 import apap.tutorial.cineplux.repository.UserDB;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,20 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserModel> getAll() {
         return userDB.findAll();
+    }
+
+    @Override
+    public UserModel getById(String id) {
+        Optional<UserModel> user = userDB.findById(id);
+        if(user.isPresent()){
+            return user.get();
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteUser(UserModel user) {
+        userDB.delete(user);
     }
 
 }

@@ -9,4 +9,6 @@ public interface UserService {
     UserModel addUser(UserModel user);
     String encrypt(String password);
     List<UserModel> getAll();
+    UserModel getById(String id);
+    void deleteUser(UserModel user);
 }
