@@ -5,6 +5,8 @@ import apap.tutorial.cineplux.model.UserModel;
 import apap.tutorial.cineplux.service.RoleService;
 import apap.tutorial.cineplux.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,5 +39,16 @@ public class UserController {
         userService.addUser(user);
         model.addAttribute("user", user);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/viewall")
+    private String viewAllUser(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getAuthorities().toString().equals("[ADMIN]")) {
+            List<UserModel> listUser = userService.getAll();
+            model.addAttribute("listUser", listUser);
+            return "list-user";
+        }
+        return "access-denied";
     }
 }

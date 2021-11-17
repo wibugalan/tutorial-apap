@@ -7,6 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,6 +28,11 @@ public class UserServiceImpl implements UserService{
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
         return hashedPassword;
+    }
+
+    @Override
+    public List<UserModel> getAll() {
+        return userDB.findAll();
     }
 
 }
