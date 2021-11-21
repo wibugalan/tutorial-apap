@@ -1,6 +1,25 @@
 # Tutorial APAP
 ## Authors
 * **Muhammad Marsha Prawira** - *1906353864* - *C*
+## Tutorial 6
+### What I have learned today
+Saya belajar penggunaan login dan keamanan lainnya pada springboot.
+### Pertanyaan
+1. Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?
+= 
+- Otentikasi adalah sebuah mekanisme untuk mengidentifikasikan input pada form login menghasilkan pengguna yang tepat. konsep ini di implementasikan di websecurityconfig yang ada di package security.
+- Otorisasi adalah sebuah mekanisme yang menentukan apakah pengguna memiliki akses terhadap suatu fitur atau tidak. contoh konsep ini pada tutorial ada pada akses user yang hanya bisa oleh ADMIN atau ubah pegawai dengan MANAGER.
+2. Apa itu BCryptPasswordEncoder? Jelaskan secara singkat cara kerja dan tujuannya.
+= BCryptPasswordEncoder merupakan password encoder yang kita gunakan pada tutorial kali ini untuk decoding dan encoding password. Sistem ini menggunakan cara pembuatan objek BCryptPasswordEncoder yang dapat digunakan method encode atau decode untuk memproses password.
+3. Apakah penyimpanan password sebaiknya menggunakan encryption atau hashing? Mengapa demikian?
+= Hashing. apabila menggunakan enkripsi, mekanisme tersebut membutuhkan key untuk memprosesnya. Apabila key tersebut tercuri, maka pencurian data sangat mudah dilakukan.
+4. Jelaskan secara singkat apa itu UUID beserta penggunaannya!
+= UUID atau universally unique identifier merupakan karakter identifikasi yang digunakan untuk mengidentifikasi informasi. Penggunaan UUID adalah untuk menjaga keamanan karena karakter UUID ini unik untuk mengakses sebuah informasi.
+5. Apa kegunaan class UserDetailsServiceImpl.java? Mengapa harus ada class tersebut padahal kita sudah memiliki class UserRoleServiceImpl.java
+= UserDetail digunakan untuk mengatur mekanisme otentikasi pengguna.Hal tersebut karena class ini extend dari spring security.
+### What I did not understand
+Postmapping pada login diatur di mana ya? karena form menggunakan method POST sedangkan pada controller tidak ada Postmapping.
+---
 ---
 ## Tutorial 5
 ### What I have learned today
