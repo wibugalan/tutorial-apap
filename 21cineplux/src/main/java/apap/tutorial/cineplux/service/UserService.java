@@ -12,4 +12,5 @@ public interface UserService {
     UserModel getById(String id);
     void deleteUser(UserModel user);
     UserModel getByUsername(String uname);
+    boolean cekEmaul(String email);
 }

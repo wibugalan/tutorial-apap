@@ -4,6 +4,7 @@ import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.model.UserModel;
 import apap.tutorial.cineplux.repository.UserDB;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,4 +56,14 @@ public class UserServiceImpl implements UserService{
         return userDB.findByUsername(uname);
     }
 
+    @Override
+    public boolean cekEmaul(String email) {
+        List<UserModel> user = userDB.findAll();
+        for (UserModel u: user) {
+            if (u.getEmail().equals(email)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -39,9 +39,14 @@ public class UserController {
 
     @PostMapping(value = "/addUser")
     private String addUserSubmit(@ModelAttribute UserModel user, Model model) {
-        userService.addUser(user);
-        model.addAttribute("user", user);
-        return "redirect:/";
+        boolean cond = userService.cekEmaul(user.getEmail());
+        if (cond) {
+            userService.addUser(user);
+            model.addAttribute("user", user);
+            return "redirect:/";
+        }
+        return "emaildigunakan";
+
     }
 
     @GetMapping(value = "/viewall")
