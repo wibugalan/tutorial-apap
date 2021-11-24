@@ -23,6 +23,8 @@ export default class Home extends React.Component {
         const newItem = { ...item };
         const targetInd = newItems.findIndex((it) => it.id === newItem.id);
         if (targetInd < 0) {
+            const bal = this.state.balance - newItem.price;
+            this.setState({balance:bal})
             newItem.inCart = true;
             newItems.push(newItem);
             this.updateShopItem(newItem, true)
@@ -47,6 +49,8 @@ export default class Home extends React.Component {
         const newItem = { ...item };
         const targetInd = newItems.findIndex((it) => it.id === newItem.id);
         if (targetInd >= 0) {
+            const bal = this.state.balance + newItem.price;
+            this.setState({balance:bal})
             newItem.inCart = false;
             newItems.splice(targetInd, 1);
             this.updateShopItem(newItem, false);
