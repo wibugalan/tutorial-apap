@@ -22,8 +22,11 @@ export default class Home extends React.Component {
         const newItems = [...this.state.cartItems]
         const newItem = { ...item };
         const targetInd = newItems.findIndex((it) => it.id === newItem.id);
-        if (targetInd < 0) {
-            const bal = this.state.balance - newItem.price;
+        const bal = this.state.balance - newItem.price;
+        if (bal<0) {
+            alert("Balance not sufficient!")
+        }
+        else if (targetInd < 0) {
             this.setState({balance:bal})
             newItem.inCart = true;
             newItems.push(newItem);
