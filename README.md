@@ -3,6 +3,35 @@
 * **Muhammad Marsha Prawira** - *1906353864* - *C*
 ## Tutorial 6
 ### What I have learned today
+Saya belajar menggunakan react dengan functional serta class based.
+### Pertanyaan
+1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan.
+= 
+Latihan pertama:
+Pada latihan pertama saya mengerjakan penghapusan item dari cart dengan menggunakan cara yang cukup mirip dengan menambahkan item ke cart. Pertama saya membuat class handleDeleteItemFromCart ![handleDeleteItemFromCart](https://user-images.githubusercontent.com/75771815/143243058-9273fa06-d50a-4ec4-8668-86c03a74199a.jpg) yang akan mengubah inCart dari sebuah item menjadi false (balik ke list item) dan mengeluarkannya dari cartItems APABILA targetInd atau index pada cartItems 0 atau lebih besar (item ada pada cartItems). Setelah itu, isi property onItemClick dengan this.handleDeleteItemFromCart ![onItemClick](https://user-images.githubusercontent.com/75771815/143243844-eafe4baf-33db-4f00-87a2-64ac5d7ddf21.jpg)
+
+Latihan kedua:
+Pada latihan kedua, saya perlu untuk memodifikasi fungsi tambah dan hapus item dari cart. Pada fungsi tambah ![tambah](https://user-images.githubusercontent.com/75771815/143244580-60fe647d-b44e-4eca-b32b-0fd8aeee1312.jpg)
+saya menambahkan baris yang dicentang. Baris yang dicentang pertama akan mengkalkulasi balance setelah dikurangi item yang dimasukan ke cart. Baris centang kedua akan mengeset state dari balance menjadi hasil kalkulasi tersebut.
+Pada fungsi kurang, saya juga menambahkan 2 baris ![kurang](https://user-images.githubusercontent.com/75771815/143245076-52a4acb6-7902-412c-98e8-45c573c29804.jpg)
+Baris pertama akan mengkalkulasikan balance setelah ditambah item yang dihapus dari cart. Baris centang kedua akan mengeset state dari balance menjadi hasil kalkulasi tersebut.
+
+Latihan ketiga:
+Pada latihan ketiga saya memodifikasi method tambah dengan menambahkan kode yang saya tandai ![latihan 3](https://user-images.githubusercontent.com/75771815/143245561-1082b60b-cc9f-4dd4-a9c8-9d1af6e2cc47.jpg)
+blok kode tersebut akan mengecek apakah balance setelah dikurangi item yang akan dipindahkan menjadi kurang dari 0. Apabila kurang dari 0, maka akan mengeluarkan alert.
+
+2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?
+= State adalah data yang dimiliki oleh suatu class atau function, sedangkan props adalah data yang dipassing antar fungsi/class menuju fungsi/class lainnya.
+3. Menurut kamu, apakah sebaiknya kita menggunakan component (e.g. List, Item) dalam React? sebutkan alasannya.
+= Iya. Karena react mendukung code splitting. Kita dapat menggunakan paradigma membangun suatu aplikasi dari komponen-komponen yang kecil. Sehingga apabila terdapat perubahan pada salah satu komponen, kita tidak perlu mengubah secara keseluruhan.
+4. Apa perbedaan class component dan functional component?
+= Class adalah paradigma dengan menggunakan OOP dan merupakan metode lama yang digunakan di react. Sedangkan di update react 16.8 dikenalkan functional component untuk meminimalisir this.state yang berlebih dengan menggunakan react hook.
+5. Dalam react, apakah perbedaan component dan element?
+= React elemen adalah objek yang merepresentasikan DOM yang terdiri dari element-element HTML seperti button, div, dan lain-lain. Sedangkan Component adalah kumpulan dari element yang akan membentuk aplikasi kita. Saat menamakan component itu harus selalu diawali dengan kapital, sedangkan element tidak kapital.
+### What I did not understand
+---
+## Tutorial 6
+### What I have learned today
 Saya belajar penggunaan login dan keamanan lainnya pada springboot.
 ### Pertanyaan
 1. Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?
