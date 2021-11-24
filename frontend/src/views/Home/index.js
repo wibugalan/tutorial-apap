@@ -42,6 +42,18 @@ export default class Home extends React.Component {
         this.setState({ cartHidden: !cartHidden })
     }
 
+    handleDeleteItemFromCart = (item) => {
+        const newItems = [...this.state.cartItems]
+        const newItem = { ...item };
+        const targetInd = newItems.findIndex((it) => it.id === newItem.id);
+        if (targetInd >= 0) {
+            newItem.inCart = false;
+            newItems.splice(targetInd, 1);
+            this.updateShopItem(newItem, false);
+        }
+        this.setState({ cartItems: newItems });
+    };
+
     render() {
         return (
             <div className="container-fluid">
@@ -67,7 +79,7 @@ export default class Home extends React.Component {
                                 <List
                                     title="My Cart"
                                     items={this.state.cartItems}
-                                    onItemClick={() => { }}>
+                                    onItemClick={ this.handleDeleteItemFromCart }>
                                 </List>
                             </div>
                         ) : <div className="col-sm">

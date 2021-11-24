@@ -25,27 +25,27 @@ export default function Item(props) {
           <p className="mb-1 text-md"> {description}</p>
         </div>
       </div>
-      <CustomIconButton isShopList={isShopList} inCart={inCart} handleChange={handleChange}/>
+      <CustomIconButton isShopList={isShopList} inCart={inCart} handleChange={handleChange} />
     </div>
   );
 }
 
 function CustomIconButton({ isShopList, inCart, handleChange }) {
-    if (isShopList) {
-        if (inCart) {
-            return null;
-        }
-
-        return (
-            <IconButton onClick={handleChange}>
-                <AddShoppingCartIcon/>
-            </IconButton>
-        );
-    } else {
-        return (
-            <IconButton onClick={handleChange}>
-                {inCart ? <DeleteIcon/> : <AddShoppingCartIcon/>}
-            </IconButton>
-        );
+  if (isShopList) {
+    if (inCart) {
+      return null;
     }
+
+    return (
+      <IconButton onClick={handleChange}>
+        <AddShoppingCartIcon />
+      </IconButton>
+    );
+  } else {
+    return (
+      <IconButton onClick={handleChange}>
+        {inCart ? <DeleteIcon /> : <AddShoppingCartIcon />}
+      </IconButton>
+    );
+  }
 }
