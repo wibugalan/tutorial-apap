@@ -36,14 +36,32 @@ function App() {
         const newItems = [...cartItems];
         const newItem = { ...item };
         const targetInd = newItems.findIndex((it) => it.id === newItem.id);
-
-        if (targetInd < 0) {
+        const bal = balance - newItem.price;
+        if (bal < 0) {
+            alert("Balance not sufficient!")
+        }
+        else if (targetInd < 0) {
+            setBalance(bal);
             newItem.inCart = true;
             newItems.push(newItem);
             updateShopItem(newItem, true)
         }
         setCartItems(newItems);
     }
+
+    function handleDeleteItemFromCart(item) {
+        const newItems = [...cartItems];
+        const newItem = { ...item };
+        const targetInd = newItems.findIndex((it) => it.id === newItem.id);
+        if (targetInd >= 0) {
+            const bal = balance + newItem.price;
+            setBalance(bal);
+            newItem.inCart = false;
+            newItems.splice(targetInd, 1);
+            updateShopItem(newItem, false)
+        }
+        setCartItems(newItems)
+    };
 
     return (
         <div className="container-fluid">
@@ -70,7 +88,7 @@ function App() {
                             <List
                                 title="My Cart"
                                 items={cartItems}
-                                onItemClick={() => { }}
+                                onItemClick={handleDeleteItemFromCart}
                             ></List>
                         </div>
                     ) : <div className="col-sm">
