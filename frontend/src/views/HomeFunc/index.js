@@ -63,6 +63,16 @@ function App() {
         setCartItems(newItems)
     };
 
+    function handleDeleteAllFromCart(item) {
+        var tempBalance = balance;
+        cartItems.forEach(element => {
+            tempBalance = tempBalance + element.price;
+            updateShopItem(element, false);
+        });
+        setBalance(tempBalance);
+        setCartItems([]);
+    }
+
     return (
         <div className="container-fluid">
             <h1 className="text-center mt-3 mb-0">Mini Commerce</h1>
@@ -85,6 +95,7 @@ function App() {
                 <div className="row mt-3">
                     {!cartHidden ? (
                         <div className="col-sm">
+                            <button onClick={handleDeleteAllFromCart} items={cartItems} >delete all</button>
                             <List
                                 title="My Cart"
                                 items={cartItems}
