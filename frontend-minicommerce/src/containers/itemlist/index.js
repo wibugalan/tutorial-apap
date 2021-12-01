@@ -46,7 +46,15 @@ class ItemList extends Component {
     }
 
     handleAddItem() {
-        this.setState({ isCreate: true });
+        this.setState({
+            isCreate: true,
+            title: "",
+            price: 0,
+            description: "",
+            category: "",
+            quantity: 0
+
+        })
     }
 
     handleCancel(event) {
