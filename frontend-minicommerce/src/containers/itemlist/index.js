@@ -4,6 +4,7 @@ import classes from "./styles.module.css";
 import APIConfig from "../../api/APIConfig"
 import Button from "../../components/button";
 import Modal from "../../components/modal";
+import Search from "../../components/search";
 
 class ItemList extends Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class ItemList extends Component {
         this.handleEditItem = this.handleEditItem.bind(this);
         this.handleSubmitEditItem = this.handleSubmitEditItem.bind(this);
         this.handleSubmitItem = this.handleSubmitItem.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
 
@@ -89,6 +91,18 @@ class ItemList extends Component {
         })
     }
 
+    async handleSearch() {
+        const value = document.getElementById("search").value
+        console.log("here")
+        if (value === "") {
+            this.loadData()
+        }
+        else {
+            const { data } = await APIConfig.get(`/item/?title=${value}`);
+            this.setState({ items: data.result });
+        }
+    }
+
     async handleSubmitEditItem(event) {
         event.preventDefault();
         try {
@@ -148,6 +162,7 @@ class ItemList extends Component {
         return (
             <div className={classes.itemList}>
                 <h1 className={classes.title}>All Items</h1>
+                <Search idField="search" action={this.handleSearch}></Search>
                 <Button action={this.handleAddItem}>
                     Add Item
                 </Button>
