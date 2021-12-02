@@ -3,6 +3,8 @@ import classes from "./styles.module.css";
 const CartItem = (props) => {
     const { id, title, price, description, category, handleEdit, quantity} =
         props;
+
+    const total = price * quantity
     return (
         <div className={classes.item}>
             <h3>{`ID ${id}`}</h3>
@@ -11,6 +13,7 @@ const CartItem = (props) => {
             <p>{`Deskripsi: ${description}`}</p>
             <p>{`Kategori: ${category}`}</p>
             <p>{`stok: ${quantity}`}</p>
+            <p className={classes.bold}>{`Total Harga: ${total}`}</p>
         </div>
     );
 };
