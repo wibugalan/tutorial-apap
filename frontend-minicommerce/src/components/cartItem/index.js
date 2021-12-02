@@ -12,7 +12,7 @@ const CartItem = (props) => {
             <p>{`Harga: ${price}`}</p>
             <p>{`Deskripsi: ${description}`}</p>
             <p>{`Kategori: ${category}`}</p>
-            <p>{`stok: ${quantity}`}</p>
+            <p>{`Jumlah: ${quantity}`}</p>
             <p className={classes.bold}>{`Total Harga: ${total}`}</p>
         </div>
     );
