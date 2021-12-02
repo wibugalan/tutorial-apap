@@ -1,7 +1,50 @@
 # Tutorial APAP
 ## Authors
 * **Muhammad Marsha Prawira** - *1906353864* - *C*
-## Tutorial 6
+## Tutorial 8
+### What I have learned today
+Saya belajar mengintegrasikan react dengan springboot
+### Pertanyaan
+1. Ceritakan langkah - langkah yang kalian lakukan untuk solve LATIHAN no.1, dan mengapa kalian melakukan langkah - langkah tersebut?
+Saya memberikan kode this.setState({
+                id: "",
+                title: "",
+                price: 0,
+                description: "",
+                category: "",
+                quantity: 0
+            }) yang akan mengosongkan nilai-nilai tersebut setelah fungsi dijalankan.
+2. Jelaskan fungsi dari async dan await!
+= async menandakan bahwa fungsi tersebut bersifat asinkronus dan tidak perlu loading. Await merupakan penanda bahwa javascript akan memberikan jeda sampai hasil diberikan pada fungsi async.
+3. Masukkan jawaban dari Screenshot yang diperintahkan di halaman 9 pada Component Lifecycle pada pertanyaan ini.
+![Screenshot (2376)](https://user-images.githubusercontent.com/75771815/144437568-0f7a736d-4426-4a35-b594-d9a578178440.png)
+![Screenshot (2377)](https://user-images.githubusercontent.com/75771815/144437590-39b7a5ac-51e6-4a22-95d9-5772465d090f.png)
+![Screenshot (2378)](https://user-images.githubusercontent.com/75771815/144437598-19efef14-1dc3-42c6-9160-6731e7861f43.png)
+
+![Screenshot (2379)](https://user-images.githubusercontent.com/75771815/144437602-be9139dc-566f-4196-9c48-c5476ea804a7.png)
+![Screenshot (2380)](https://user-images.githubusercontent.com/75771815/144437609-710c44bc-a46d-4186-9f40-831044ba26b7.png)
+![Screenshot (2381)](https://user-images.githubusercontent.com/75771815/144437617-dfe51a80-d366-4289-a448-506aace8f6f5.png)
+![Screenshot (2382)](https://user-images.githubusercontent.com/75771815/144437621-589dc66c-32a6-4474-a570-c393a442b826.png)
+
+![Screenshot (2383)](https://user-images.githubusercontent.com/75771815/144437637-a70a47fe-273f-45c3-98a8-343d06858887.png)
+![Screenshot (2384)](https://user-images.githubusercontent.com/75771815/144437645-ded1f99d-7c23-485c-8c06-23e8d8812e5c.png)
+![Screenshot (2385)](https://user-images.githubusercontent.com/75771815/144437653-5b56a42b-f6b3-464f-8267-df386ff4a5ea.png)
+
+
+4. Jelaskan fungsi dari componentDidMount, shouldComponentUpdate, componentDidUpdate, componentWillReceiveProps, componentWillUnmount. 
+
+componentDidMount = Fungsi yang akan dijalankan saat website akan dirender, usecase yang biasa digunakan adalah saat setelah endpoint get dipanggil sebelum dirender.
+
+shouldComponentUpdate = fungsi yang mengeluarkan boolean untuk menentukan apakah rendering pada komponen akan berjalan atau tidak, use casenya adalah saat ingin mengetahui perubahan porps/state dari komponen terkait 
+
+componentDidUpdate = fungsi yang dipanggil setelah component dirender, use casenya adalah saat ingin melakukan perubahan dari sisi user seperti pengisian text atau klik button
+
+componentWillReceiveProps = fungsi yang dipanggil sebelum komponen menerima nilai props baru. use casenya adalah saat ingin mengubah isi komponen 
+
+componentWillUnmount = fungsi yang dipanggil ketika komponen akan dihapus, use case yang digunakan biasanya adalah saat penghapusan salah satu bagian komponen
+### What I did not understand
+---
+## Tutorial 7
 ### What I have learned today
 Saya belajar menggunakan react dengan functional serta class based.
 ### Pertanyaan
