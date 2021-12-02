@@ -5,12 +5,18 @@ import APIConfig from "../../api/APIConfig"
 import Button from "../../components/button";
 import Modal from "../../components/modal";
 import Search from "../../components/search";
+import { Badge } from '@mui/material';
+import Fab from '@mui/material/Fab';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from "react-router-dom";
+import ViewStreamIcon from '@mui/icons-material/ViewStream';
 
 class ItemList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             items: [],
+            cartItems: [],
             isLoading: false,
             isCreate: false,
             isEdit: false,
@@ -29,10 +35,12 @@ class ItemList extends Component {
         this.handleSubmitEditItem = this.handleSubmitEditItem.bind(this);
         this.handleSubmitItem = this.handleSubmitItem.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleAddToChart = this.handleAddToChart.bind(this);
     }
 
 
     componentDidMount() {
+        this.loadDataCart()
         this.loadData();
     }
 
@@ -157,11 +165,76 @@ class ItemList extends Component {
         this.handleCancel(event);
     }
 
+    async handleAddToChart(event) {
+        const input = document.getElementById("itemQuantity" + event.id).value;
+        const items = [...this.state.cartItems]
+        const data = {
+            idItem: event.id,
+            quantity: input
+        }
+        try {
+            if (input <= 0) {
+                alert("Masukan input dengan benar")
+            }
+            else {
+                if (input != "") {
+                    const targetInd = items.findIndex((it) => it.item.id === event.id);
+                    if (targetInd >= 0) {
+                        if (input <= event.quantity - items[targetInd].quantity) {
+                            await APIConfig.post("/cart", data);
+                            this.loadDataCart()
+                            alert("Item berhasil ditambahkan ke dalam cart")
+                        }
+                        else {
+                            alert("Stok item tidak cukup")
+                        }
+                    }
+                    else {
+                        if (input <= event.quantity) {
+                            await APIConfig.post("/cart", data);
+                            this.loadDataCart()
+                            alert("Item berhasil ditambahkan ke dalam cart")
+                        }
+                        else {
+                            alert("Stok item tidak cukup")
+                        }
+                    }
+                }
+                else {
+                    alert("Masukan jumlah barang yang diinginkan");
+                }
+            }
+        }
+        catch (error) {
+            alert("Oops terjadi masalah pada server")
+            console.log(error);
+        }
+    }
+
+    async loadDataCart() {
+        try {
+            const { data } = await APIConfig.get("/cart");
+            this.setState({ cartItems: data.result });
+        } catch (error) {
+            alert("Oops terjadi masalah pada server");
+            console.log(error);
+        }
+    }
+
     render() {
         console.log("render()");
         return (
             <div className={classes.itemList}>
                 <h1 className={classes.title}>All Items</h1>
+                <Link to='/cart-item'>
+                    <div style={{ position: 'fixed', top: 25, right: 25 }}>
+                        <Fab variant="extended" >
+                            <Badge color="secondary" badgeContent={this.state.cartItems.length}>
+                                <ShoppingCartIcon />
+                            </Badge>
+                        </Fab>
+                    </div>
+                </Link>
                 <Search idField="search" action={this.handleSearch}></Search>
                 <Button action={this.handleAddItem}>
                     Add Item
@@ -176,7 +249,8 @@ class ItemList extends Component {
                             description={item.description}
                             category={item.category}
                             quantity={item.quantity}
-                            handleEdit = {() => this.handleEditItem(item)}
+                            handleEdit={() => this.handleEditItem(item)}
+                            handleAddToChart={() => this.handleAddToChart(item)}
                         />
                     ))}
                 </div>

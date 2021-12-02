@@ -3,7 +3,7 @@ import Button from "../button";
 import classes from "./styles.module.css";
 import ItemList from "../../containers/itemlist/index";
 const Item = (props) => {
-    const { id, title, price, description, category, handleEdit, quantity, handleDelete } =
+    const { id, title, price, description, category, handleEdit, quantity, handleDelete, handleAddToChart } =
         props;
     return (
         <div className={classes.item}>
@@ -14,6 +14,11 @@ const Item = (props) => {
             <p>{`Kategori: ${category}`}</p>
             <p>{`stok: ${quantity}`}</p>
             <Button action={handleEdit}>Edit</Button>
+            <input className={classes.textField} type="number" name="quantity" id={`itemQuantity${id}`}>
+            </input>
+            <Button action={handleAddToChart}>
+                Add to cart
+            </Button>
         </div>
     );
 };
